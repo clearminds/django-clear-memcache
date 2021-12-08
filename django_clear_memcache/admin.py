@@ -6,7 +6,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
+
+try:
+    #django 4.x
+    from django.utils.translation import gettext_lazy as _
+except ImportError:
+    # Older Versions
+    from django.utils.translation import ugettext_lazy as _
 
 from django_clear_memcache.clear import ClearMemcacheController, ClearMemcacheNoCacheFoundError
 from django_clear_memcache.models import ClearMemcache
